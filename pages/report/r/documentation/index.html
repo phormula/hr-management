@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+<title>BytescoutPDF.js documentation:</title>
+
+
+<!-- simple css styling for body -->
+  <style type="text/css">
+	  html, body {
+		background-color: #eee;
+	font-family: Tahoma, Geneva, sans-serif;
+	  }
+ul {
+	margin: 2em; 
+}
+ul li {
+	padding-left: 0.2em; 
+	margin-bottom: .5em; 
+}	  
+   </style>
+
+<script type="text/javascript"> 
+function select_all()
+{
+var text_val=eval("document.formSampleSource.code");
+text_val.focus();
+text_val.select();
+}
+</script>
+
+	</head>
+	<body>
+
+	<center><h1>BytescoutPDF.js documentation:</h1></center>
+
+
+	<p>What is BytescoutPDF.js? This script made with pure javascript code allows you to generate PDF documents with text, images, and drawings. 
+	<br /><strong>No server-side code is required</strong></p>
+
+	<p><strong>SAMPLE CODE (see /Examples/ folder for more samples):</strong></p>
+	
+	
+	<form name="formSampleSource" method=post action=''> 
+	<textarea name="code" cols="100" rows="10" style="font-size:small" onClick="select_all();">
+	
+	  <div id="getpdf"><i>generating PDF file, please wait...</i></div>
+	
+	  <script language="javascript" src="BytescoutPDF.js"></script>
+	
+		<script language="javascript">
+
+			// functon to create PDF object and make PDF document
+			function CreatePDF() {
+				// create BytescoutPDF object instance
+				var pdf = new BytescoutPDF();
+
+				// add new page
+				pdf.pageAdd();
+
+			   // draw text
+				pdf.textAdd(20, 20, 'Hello Times Roman!');
+
+				// return BytescoutPDF object instance
+				return pdf;
+			}
+		
+			// function to create link to view pdf
+			function CreatePDFDownloadLink(PDFContentBase64){
+				// find "getpdf" DIV element that we use to show the link to view or download PDF 
+				var pdfdiv = document.getElementById("getpdf");
+				pdfdiv.innerHTML = '<h3><a title=\"generate and View PDF file as attachment\" href=\"data:application/pdf;base64,' + PDFContentBase64 + '\">Click here to generate and VIEW Sample.PDF right in the browser ...<\/a></h3>';                
+
+			}
+					
+			// calls CreatePDF() from createpdf.js to generate PDF file and return BytescoutPDF object instance		    
+			var pdf = CreatePDF();
+			
+			// now we set "onload" event for our PDF object into a custom function which will create links to view and download PDF once the generation is done
+			// this is neccessary as PDF generation may take some time especially if you use images (so images should be downloaded and encoded)
+			// so this function below will be called in "onload" event which is fired once PDF file generation has been completed
+			pdf.onload( 
+						function() {
+							// get generated PDF file in a form of base64 encoded string
+							var PDFContentBase64 = pdf.getBase64Text();
+							// now we create links to view or download PDF file generated (using method [1] - via "datauri" supported in latest versions of most major browsers)
+							CreatePDFDownloadLink(PDFContentBase64);
+
+						}
+			);    
+		</script>	
+				
+	</textarea>
+	</form>
+	
+	<h2>ONLINE DEMO SAMPLES (the copy from /Examples/ in the downloadable script)</h2>
+	
+	<ol>
+	    <li><a href="add-image-from-canvas/sample.html">Add image from canvas </a></li>	    
+        <li><a href="add-image-from-url/sample.html">Add image from URL</a></li>	    
+        <li><a href="alpha-graphics/sample.html">Using alpha channel for graphics</a></li>	    
+        <li><a href="drawing-symbols/sample.html">Drawing symbols in PDF</a></li>	    
+        <li><a href="draw-invoice-with-table-and-logo/sample.html">Drawing PDF invoice with table and logo</a></li>	    
+        <li><a href="draw-line/sample.html">Drawing lines in PDF</a></li>	    
+        <li><a href="draw-rectangle/sample.html">Drawing rectangles in PDF</a></li>	    
+        <li><a href="german-umlauts-text">Writing text with German umlauts symbols</a></li>
+        <li><a href="header-footer/sample.html">Setting the header and the footer for pages in PDF</a></li>	    
+        <li><a href="html-formatting-and-links/sample.html">Using HTML formatting for text in PDF</a></li>	    
+        <li><a href="image-rotation/sample.html">Rotating images in PDF</a></li>	    
+        <li><a href="outlines/sample.html">Adding outlines with bookmarks to pages and http links in PDF</a></li>	    
+        <li><a href="page-orientation/sample.html">Setting page orientation in PDF</a></li>	    
+        <li><a href="page-size/sample.html">Setting page size in PDF</a></li>	    
+        <li><a href="set-document-properties/sample.html">Set PDF document properties (title, keywords, author etc)</a></li>	    
+        <li><a href="set-font-name/sample.html">Setting font name for text in PDF</a></li>	    
+        <li><a href="set-font-style/sample.html">Setting font style for text in PDF</a></li>	    
+        <li><a href="text-align/sample.html">Setting align for text in PDF</a></li>	    
+        <li><a href="text-columns/sample.html">Drawing text as columns in PDF</a></li>	    
+        <li><a href="text-images-lines/sample.html">Drawing images, lines with different colors, text with formatting</a></li>	    
+        <li><a href="text-rich-formatting/sample.html">Using rich text formatting for PDF</a></li>	    
+        <li><a href="text-rotation/sample.html">Rotating text in PDF</a></li>	    
+        <li><a href="text-wrap/sample.html">Wrapping text in PDF</a></li>	    
+                        
+	</ol>
+	
+
+ <!-- important info about local server - begin -->
+<div align="left" style="margin:10">
+ <font color="red">Please make sure you are viewing BytescoutPDF.js samples through a local server, not just by opening the html file from folder<br/>
+To run a local server:<br/>
+- if you don't know how to run local server then download free Mangoose server for Windows from <a href="http://code.google.com/p/mongoose/">http://code.google.com/p/mongoose/</a><br/>
+- copy <i>mongoose.exe</i> into the sample folder and run it by double-clicking. This will make this folder available as <a href="http://localhost:8080/">http://localhost:8080/</a><br/>
+- then open <a href="http://localhost:8080/">http://localhost:8080/</a> in the browser and browse samples<br/>
+</font>
+</div>
+ <!-- important info about local server - end -->
+
+
+	<p>Main class: <strong>BytescoutPDF</strong></p>
+	
+	<h2>BytescoutPDF class methods and properties:</h2>
+
+	<h3>
+	Document:
+	</h3>
+	
+	<!-- DOCUMENT functions -->
+	<ul>
+			<li>
+			<b>propertiesSet(title, subject, keywords, author, creator)</b> - sets PDF document properties. 
+			<br /> Available parameters are:
+			<ul>
+				<li><i>title</i> - Title of the document, this is displayed in Title field in PDF document properties</li>    	        
+				<li><i>subject</i> - Subject of the document, this is displayed in Subject field in PDF document properties</li>
+				<li><i>keywords</i> - List of keywords for the document, this is displayed in Keywords field in PDF document properties</li>    	        
+				<li><i>author</i> - Author of the document, this is displayed in Author field in PDF document properties</li>
+				<li><i>creator</i> - Creator of the document, this is displayed in Creator field in PDF document properties</li>
+			</ul>
+		</li>
+
+			<li>
+				<b>addAnchor(Name, Page, Offset)</b> - adds anchor that may be referenced by links or bookmarks.
+				<br />COMMENTS: see "html-formatting-and-links" source code example.
+			</li>
+			
+			<li>
+				<b>addBookmark(Parent, Title, Link)</b> - adds document bookmark (outline). <i>Parent</i> - parent bookmark (bookmarks can be nested), <i>Title</i> - bookmark display text, <i>Link</i> - document position, anchor or external link to go to.
+				<br />COMMENTS: see "html-formatting-and-links" source code example.
+			</li>
+
+			<li>
+			<b>onload()</b> - <i>onload</i> event that should be set to function to fire when PDF generation has been done.
+			<br />COMMENTS: see source code samples for more information
+			</li>
+
+			<li>
+			<b>onHeader()</b> - <i>onHeader</i> event that should be set to function that will be called for every document page to set the page header. 
+			<br />COMMENTS: see "header-footer" source code example.
+			</li>
+
+			<li>
+			<b>onFooter()</b> - <i>onFooter</i> event that should be set to function that will be called for every document page to set the page footer. 
+			<br />COMMENTS: see "header-footer" source code example.
+			</li>
+		
+			<li>
+			<b>getBase64Text()</b> - returns generated PDF document in base64 encoded form (so this can be passed to <i>datauri</i> or to <i>Downloadify</i> to view or download PDF to end user.
+			<br /> COMMENTS: this function should be called on <i>onload()</i> event to make sure PDF generation has been done completely (especially if you are using images)
+			</li>
+
+			<li>
+			<b>showBytescoutLink</b> - bool property (true by default) that controls if the "powered by" link to ByteScout.com is shown at the bottom of the page or not. Set to False to disable the footer 
+			</li>
+
+			<li>
+			<b>ForceJPEGForImages</b> - bool property (true by default) to force JPEG compression for all images (including canvas based images).
+			</li>
+			
+			<li>
+			<b>JPEGQuality</b> - float property (0.95 by default) that controls the JPEG quality ratio for JPEG compression. Lesser value makes lesser file size, larger value increases file size but provides higher quality. Can be from 0.01 to 0.99 or 1.00 (max JPEG compression quality). 
+			</li>
+			
+		
+	</ul>
+	
+	
+	<h3>
+	Page:
+	</h3>
+		
+	<!-- PAGE functions -->
+	<ul>  
+		
+		<li>
+			<b>pageAdd()</b> - adds new page (and this new page becomes current page).
+		</li>
+
+		<li>
+			<b>pageSetIndex()</b> - sets the current page.
+		</li>
+		
+		<li>
+			<b>pageSetOrientation(orientation)</b> - sets page orientation (default is portrait orientation). 
+			<br />Possible values are: <i>BytescoutPDF.PORTRAIT, BytescoutPDF.LANDSCAPE</i>
+		</li>	    
+				
+		<li>
+			<b>pageSetSize(pageSizeIndex)</b> - changes size for the current page using predefined page size index. Default size is A4. 
+			<br />Available values are: 
+			    <ul>
+                    <li><i>BytescoutPDF.A0</i> =  33.125x46.75 inches, 2385x3366 pixels (72 dpi)</li>    			
+                    <li><i>BytescoutPDF.A1</i> =  23.375x33.125 inches, 1683x2385 pixels (72 dpi)</li>    			
+                    <li><i>BytescoutPDF.A2</i> =  16.5x23.375 inches, 1188x1683 pixels (72 dpi)</li>   
+                    <li><i>BytescoutPDF.A3</i> =  11.75x16.5 inches, 846x1188 pixels (72 dpi)</li> 
+                    <li><i><b>BytescoutPDF.A4</b></i> = 8.25x11.75 inches, 594x846 pixels (72 dpi)</li> 
+                    <li><i>BytescoutPDF.A5</i> = 5.875x8.25 inches,  423x846 pixels (72 dpi)</li> 
+                    <li><i>BytescoutPDF.A6</i> =  4.125x5.875 inches, 297x423 pixels (72 dpi)</li>   
+                    
+                    <li><i>BytescoutPDF.A7</i> = 2.875x4.125 inches, 207x423 pixels (72 dpi)</li>     
+                    <li><i>BytescoutPDF.Letter</i> = 8.5x11 inches, 612x792 pixels (72 dpi)</li>     
+                    <li><i>BytescoutPDF.Legal</i> = 8.5x14 inches, 612x1080 pixels (72 dpi)</li>     
+                    <li><i>BytescoutPDF.Executive</i> = 7.25x10.5 inches, 522x756 pixels (72 dpi)</li>   
+                    <li><i>BytescoutPDF.JisB5</i> = 7.125x10.125 inches, 513x729 pixels (72 dpi)</li>                                                                                                                                                                                         			                                                                                
+			    </ul>
+
+			<br />For CUSTOM sizes please use .pageSetWidth(width) and .pageSetHeight(height) functions 			
+			<br /><br />
+		</li>
+		
+		<li>
+			<b>pageSetWidth(width)</b> - sets width of the current page in inches (default is 8.25 inches, A4 ). To get pixels just multiply value in inches to 72 (default PDF dpi). For 10 inches you get 720 pixels, for 5.5 inches you get 396 pixels etc.
+		</li>
+		
+		<li>
+			<b>pageSetHeight(height)</b> - sets height of the current page (default is 11.75 inches, A4 size). To get pixels just multiply value in inches to 72 (default PDF dpi). For 10 inches you get 720 pixels, for 5.5 inches you get 396 pixels etc. 
+		</li>
+
+		<li>
+			<b>addLink(X, Y, Width, Height, Link)</b> - adds a box link at specified rectangle with target. <i>Parent</i> - parent bookmark (bookmarks can be nested), <i>Title</i> - bookmark display text, <i>Link</i> - document position, anchor or external link to go to.
+			<br />COMMENTS: see "html-formatting-and-links" source code example.
+		</li>
+	</ul>
+	
+	
+	<h3>
+	Font and style:
+	</h3>
+		
+	<!-- FONT -->
+	<ul>	
+		<li>
+			<b>fontSetName(fontName)</b> - selects currently used font for text from one of 14 PDF built-in fonts.
+			<br />Available font names are: <i>Times-Roman, Helvetica, Courier, Symbol, ZapfDingbats</i> 
+			<br />You can use <strong>bold</strong>, <i>italic</i>, <ul>underline</ul> or <strong><u><i>mixed</i></u></strong> styles for fonts with <i>fontSetStyle()</i> function, see below
+		</li>
+
+		<li>
+			<b>fontSetSize(fontSize)</b> - sets size in points for the currently selected font
+		</li>
+
+		<li>
+			<b>fontSetStyle(bold, italic, underline)</b> - controls style of the current font, you can set style for new text with <i>bold, italic, inderline</i> parameters
+		</li>
+
+		<li>
+			<b>fontSetColor(R,G,B)</b> - changes font color using RGB format (where each component is 0..255). Default font color is black (0,0,0)
+		</li>
+
+		<li>
+			<b>textSetLinkStyle(Underline,R,G,B)</b> - changes links style using the underline state and the color in RGB format.
+		</li>
+	</ul>
+	
+	
+	<h3>Text output (single line)</h3>
+	
+	<!-- TEXT -->
+	
+	<ul>
+		<li>
+			<b>textAdd(x,y,text,angle)</b> - draws single text line starting at (x,y) with optional rotation (if you don want to rotate then pass <i>angle</i> as 0 (zero)
+			<br />RICH TEXT FORMATTING support: you can use &lt;b&gt; &lt&frasl;b&gt; and &lt;i&gt; &lt;&frasl;i&gt; tags to set <i>italic</i> and <b>bold</b> styles in text
+		</li>
+		
+	</ul>
+	
+	<h3>Text output (multiline)</h3>
+	
+	<!-- MULTLLINE TEXT -->
+	
+	
+	<ul>
+		<li>
+			<b>textSetBox(x,y,width,height)</b> - sets a rectangle area box for multiline text output
+		</li>
+		
+		<li>
+			<b>textSetAlign(textAlign)</b> - sets text align for multiline text output. 
+			<br /> Available values are: <i>BytescoutPDF.LEFT, BytescoutPDF.JUSTIFIED, BytescoutPDF.RIGHT, BytescoutPDF.CENTER</i>    	    
+		</li>
+		
+		<li>
+			<b>textAddToBox(text, newline)</b> - adds text into multline text box (defined with <i>textSetBox(x,y,width,height)</i>. Set <i>newline</i> parameter to <i>true</i> if you want to start from new line.
+			<br />RICH TEXT FORMATTING support: you can use &lt;b&gt; &lt&frasl;b&gt; and &lt;i&gt; &lt;&frasl;i&gt; tags to set <i>italic</i> and <b>bold</b> styles in text
+			<br />RETURNS: <i>result</i> object with the following properties:
+			    <ul>
+			        <li>
+			            <i>.bottomY</i> property which indicates bottom Y of the last text. This is useful as you could use this <i>result.bottomY</i> to check the actual end position of text you just added to the box
+			        </li>
+			        <li>
+			            <i>.end</i> property contains True (whole given text has been drawn to output PDF) or False (only partition of the given text has been drawn to PDF)
+			        </li>			        
+			</ul>
+		</li>
+
+		<li>
+			<b>setInterline(interline)</b> - sets vertical interline space for multiline text output
+		</li>
+
+		<li>
+			<b>textFitsBox(text)</b> - evaluates if <i>text</i> string will fit into the current mutline text box
+			<br />RETURNS: <i>true</i> if text will fit the box, <i>false</i> otherwise. This function is useful to check if we should start a new multiline text box or use current one
+		</li>
+		
+		<li>
+			<b>textSetBoxPadding(leftPadding, topPadding, rightPadding, bottomPadding)</b> - sets padding (margings) for text output inside the defined text box 
+		</li>	    
+
+	</ul>
+	
+	<h3>
+	Images:
+	</h3>
+		
+	<!-- IMAGES -->
+	<ul>	
+	 
+		<li>
+			<b>imageLoadFromUrl(imageSrc)</b> - loads image from URL and sets this image as currently active image.
+			<br /> COMMENTS: you may have issues with loading images from another domain as this can be limited by the browser security.
+		</li>
+
+		<li>
+			<b>imageLoadFromCanvas(canvas)</b> - loads image from given <i>canvas</i> object and makes this image currently selected image.
+		</li>
+
+		<li>
+			<b>imagePlace(x,y,angle)</b> - places currently active image into PDF at given coordinates (x,y) rotated at given angle (pass <i>0</i> (zero) to place without rotation)
+		</li>
+		
+		<li>
+			<b>imagePlaceSetSize(x,y,angle,width,height)</b> - places currently active image into PDF at given coordinates (x,y) rotated at angle (pass <i>0</i> (zero) to place without rotation) and with specified width and height.
+		</li>
+
+		<li>
+			<b>imageSetDefaultBackgroundColor(R,G,B)</b> - sets default background color for semitransparent images in RGB format. Default is white color (255,255,255)
+		</li>
+		
+	</ul>
+
+	<h3>
+	Lines and graphics:
+	</h3>
+		
+	<!-- GRAPHICS -->
+	<ul>	
+
+		<li>
+			<b>graphicsSetColor(R,G,B)</b> - sets default color for graphics drawings in RGB format. Default is black (0,0,0)
+		</li>
+		
+		<li>
+			<b>graphicsSetAlpha(A)</b> - sets alpha transparency for graphics drawings in RGB format. From 0 (transparent) to 255 (opaque). Default is 255.
+		</li>
+
+
+		<li>
+			<b>graphicsSetLineWidth(width)</b> - sets line width for lines drawings from 1 to 100.
+		</li>
+
+
+		<li>
+			<b>graphicsDrawLine(startX, startY, endX, endY)</b> - draws a line from (startX, startY) point to (endX, endY) point
+		</li>
+
+
+		<li>
+			<b>graphicsSetLineEndType(lineType)</b> - sets line ending type for line drawings
+			<br />AVAILABLE values: <i>BytescoutPDF.BUTT_CAP, BytescoutPDF.ROUND_CAP, BytescoutPDF.PROJECTING_SQUARE_CAP</i>
+		</li>
+
+		<li>
+			<b>graphicsDrawRectangle(x,y, width, height)</b> - draws rectangle at given coordinates
+		</li>
+		
+		<li>
+			<b>graphicsDrawRectangleFill(x,y, width, height)</b> - draws rectangle fill at given coordinates using the current graphics color
+		</li>	    
+		
+	</ul>
+	
+</body>
+</html>
