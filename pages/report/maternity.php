@@ -1,8 +1,8 @@
 <?php
 error_reporting(0);
-include '../../../login/dbc3.php';
+/* include '../../../login/dbc3.php';
 page_protect();
-include("../../access.php");
+include("../../access.php"); */
 include("../../connection.php");
 
 
@@ -49,7 +49,7 @@ if ($_REQUEST["from"]<>'' and $_REQUEST["to"]<>'') {
 		$sql = "SELECT employees.employee_ID, employees.TitleOfCourtesy, employees.FirstName, employees.Middle_name, employees.LastName, employee_types.types, YEAR(NOW())-YEAR(employees.HireDate) AS no_of_years, employees.rank, employee_leave.num_used, SUM(employee_leave.`num_used`) AS USED, employee_leave.starting_date, add_workday(employee_leave.`starting_date`,(employee_leave.`num_used` - 1)) as end_date FROM employees INNER JOIN employee_types ON employees.rank=employee_types.id RIGHT OUTER JOIN `employee_leave` ON employees.employee_ID=employee_leave.employee_ID AND employee_leave.year=YEAR(NOW()) AND employee_leave.leave_type=3 WHERE employees.apt_status is null AND employees.rank<>4 GROUP BY employees.employee_ID ".$search_string.$search_city.$search_section.$search_rank.$date;
 }
 
-$sql_result = mysqli_query ($conn ,$sql ) or die ('request "Could not execute SQL query" '.$sql);
+$sql_result = mysqli_query ($conn ,$sql ) or die ('request "Could not execute SQL query"');
 $report = "active";
 $maternity_report = "active";
 ?>

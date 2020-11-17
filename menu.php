@@ -14,24 +14,16 @@ $currentUrl = $protocol . '://' . $host . $script ; // Adding all
 $pos = strrpos($currentUrl,"/");
 $url = substr_replace($currentUrl,"",$pos)."/" ;
 
-$hostname = 'localhost';
-$username = 'phormula';
-$password = '11emaths';
-$datab = 'emaleck2';
-	$mysqli2 = new mysqli($hostname,$username,$password,$datab);
-if ($mysqli2->connect_error) {
-    die('Error : ('. $mysqli2->connect_errno .') '. $mysqli2->connect_error);
-}
+$url_q = "SELECT * FROM `base_url` WHERE `id`=1";
 
-$results2 = $mysqli2->query("SELECT * FROM `base_url` WHERE `id`=1");
-$row2 = $results2->fetch_assoc();
+$url_results = mysqli_query ($conn ,$url_q ) or die ('request "Could not execute SQL query" '.$url_q);
 
-$results2->free();
-$mysqli2->close();
+$burl = mysqli_fetch_assoc($url_results);
 
-	$burl = $row2["url"];
+	//$burl = $row2["url"];
 
-define("BASE_URL", $row2["url"]);
+define("BASE_URL", $burl["url"]);
+
 ?>
 <!-- Left side column. contains the sidebar -->
      <aside class="main-sidebar">
@@ -43,7 +35,7 @@ define("BASE_URL", $row2["url"]);
               <img src="<?php echo constant("BASE_URL"); ?>images/avatar.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p><?php echo $_SESSION['user_name'];?></p>
+              <p>Admin</p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>

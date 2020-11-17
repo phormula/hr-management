@@ -1,8 +1,8 @@
 <?php 
 error_reporting(0);
-include '../../login/dbc.php';
+/* include '../../login/dbc.php';
 page_protect();
-include("../access.php");
+include("../access.php"); */
 include("../connection.php");
 
 $snr = "SELECT * FROM employees WHERE employee_ID='PB0009'";

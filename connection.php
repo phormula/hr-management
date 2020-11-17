@@ -1,9 +1,9 @@
 <?php
 /* Database connection start */
 $servername = "localhost";
-$username = "phormula";
-$password = "11emaths";
-$dbname = "emaleck2";
+$username = "root";
+$password = "";
+$dbname = "hr";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 

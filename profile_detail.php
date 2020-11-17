@@ -1,6 +1,6 @@
 <?php
-/* error_reporting(0);
-include '../login/dbc.php';
+error_reporting(0);
+/* include '../login/dbc.php';
 page_protect();
 include("access.php"); */
 include("connection.php");

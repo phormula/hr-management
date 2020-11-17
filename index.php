@@ -286,7 +286,7 @@ $dashboard = "active";
             <!-- employees on leave -->
               <div class="small-box bg-lime">
                 <div class="inner">
-                  <h3><?php echo $leaven;?></h3>
+                  <h3><?php //echo $leaven;?></h3>
                   <p>Employees On Leave</p>
                   Male - <?php //echo $leavenm;?><br>
 				  Female - <?php //echo $leavenf;?>                </div>

@@ -1,8 +1,8 @@
 <?php
 error_reporting(0);
-include '../../../login/dbc3.php';
+/* include '../../../login/dbc3.php';
 page_protect();
-include("../../access.php");
+include("../../access.php"); */
 include("../../connection.php");
 
 
@@ -49,7 +49,7 @@ if ($_REQUEST["from"]<>'' and $_REQUEST["to"]<>'') {
 		$sql = "SELECT a.`employee_ID`, e.TitleOfCourtesy, e.FirstName, e.Middle_name, e.LastName,a.`starting_date`, a.`leave_type`, a.`designated_leave_days`, a.`num_used`, a.`num_left`, add_workday(a.`starting_date`,(a.`num_used` - 1)) as end_date FROM  employee_leave a  JOIN (SELECT `employee_ID`, MAX(`starting_date`) starting_date FROM employee_leave GROUP BY `employee_ID`) b ON a.`employee_ID`=b.`employee_ID` and a.`starting_date`=b.`starting_date` INNER JOIN employees e ON a.`employee_ID`=e.`employee_ID` WHERE add_workday(a.`starting_date`,(a.`num_used` - 1))>now()".$search_string.$search_city.$search_section.$search_rank.$date;
 }
 
-$sql_result = mysqli_query ($conn ,$sql ) or die ('request "Could not execute SQL query" '.$sql);
+$sql_result = mysqli_query ($conn ,$sql ) or die ('request "Could not execute SQL query" ');
 /*LEFT OUTER JOIN `contracts` ON employees.employee_ID=contracts.employee_ID LEFT OUTER JOIN `employee_types` ON employees.rank=employee_types.id */
 $table = "active";
 $leave_table = "active";

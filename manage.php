@@ -1,8 +1,8 @@
 <?php
 error_reporting(0);
-include '../login/dbc.php';
+/* include '../login/dbc.php';
 page_protect();
-include("access.php");
+include("access.php"); */
 include("connection.php");
 $admin = "SELECT * FROM employees WHERE employee_ID='PB0009'";
 $admin_result = mysqli_query($conn, $admin) or die('request "Could not execute SQL query" '.$admin);

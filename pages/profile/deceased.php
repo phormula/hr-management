@@ -1,8 +1,8 @@
 <?php
 error_reporting(0);
-include '../../../login/dbc3.php';
+/* include '../../../login/dbc3.php';
 page_protect();
-include("../../access.php");
+include("../../access.php"); */
 include("../../connection.php");
 
 
@@ -190,9 +190,21 @@ $current_class = "even";
 
   <tr data-href="../../profile_detail.php?id=<?php echo $row["employee_ID"]; ?>" class="empp">
   <td>&nbsp;</td>
-    <td style="margin-left:50px"><?php if($row["PhotoPath"] != ""){
-		echo "<img class='img-circle profile-user-img img-responsive' src='../../".$row["PhotoPath"]."' style='width:140px' alt='Profile Image for ".$row["employee_ID"]."'/>";}else{ echo "
-<img src='../../images/avatar.jpg' class='img-circle profile-user-img img-responsive'  style='width:140px' alt='Profile Image for ".$row["employee_ID"]."'/>";} ?></td>
+  <td style="margin-left:50px">
+      <?php 
+        if($row["PhotoPath"] != ""){
+          if(file_exists('../../'.$row["PhotoPath"])){
+            echo "<img class='img-circle profile-user-img img-responsive' src='../../".$row["PhotoPath"]."' style='width:140px' alt='Profile Image for ".$row["employee_ID"]."'/>";
+          }
+          else{
+            echo "<img src='../../images/avatar.jpg' class='img-circle profile-user-img img-responsive'  style='width:140px' alt='Profile Image for ".$row["employee_ID"]."'/>";
+          }
+        }
+        else{ 
+          echo "<img src='../../images/avatar.jpg' class='img-circle profile-user-img img-responsive'  style='width:140px' alt='Profile Image for ".$row["employee_ID"]."'/>";
+        } 
+      ?>
+    </td>
     <td style="margin-left:100px"><h4><?php echo "".$row["TitleOfCourtesy"]." ".$row["FirstName"]." ".$row["Middle_name"]." ".$row["LastName"]; ?></h4><?php echo $row["employee_ID"]; ?><br>
 <?php echo $row["Position"]; ?><br>
 <span style="color:#00C0EF">Click for Details</span></td>
