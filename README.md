@@ -2,7 +2,6 @@ HR management system
 ============
 
 # Demo 
-https://bfileg.com/hr-system
 
 
 
